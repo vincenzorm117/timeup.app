@@ -1,15 +1,17 @@
 "use strict";
 
-exports.handler = async (event) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: "Go Serverless v2.0! Your function executed successfully!",
-        input: event,
-      },
-      null,
-      2
-    ),
-  };
+const { requestOmdbAPI } = require("omdb");
+
+exports.handler = async ({ queryStringParameters = {} }) => {
+  try {
+    return {
+      statusCode: 200,
+      body: await requestOmdbAPI(queryStringParameters),
+    };
+  } catch (error) {
+    return {
+      statusCode: 400,
+      body: error,
+    };
+  }
 };
