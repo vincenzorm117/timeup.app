@@ -24,3 +24,13 @@ variable "domain" {
   type        = string
   description = "API Gateway Lambda server domain name."
 }
+
+variable "omdb_api_key" {
+  type        = string
+  description = "omdb API Key"
+}
+
+variable "omdb_api_domain_name" {
+  type        = string
+  description = "omdb domain name"
+}
