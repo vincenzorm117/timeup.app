@@ -1,3 +1,7 @@
+locals {
+  api_domain_name = "api.${var.domain}"
+}
+
 ################################################
 # API Gateway
 
@@ -36,14 +40,24 @@ resource "aws_api_gateway_deployment" "api" {
 
 resource "aws_api_gateway_domain_name" "api" {
   regional_certificate_arn = aws_acm_certificate_validation.timeup.certificate_arn
-  domain_name     = "api.${var.domain}"
+  domain_name     = local.api_domain_name
 
   endpoint_configuration {
     types = ["REGIONAL"]
   }
 }
 
+resource "aws_api_gateway_stage" "api" {
+  deployment_id = aws_api_gateway_deployment.api.id
+  rest_api_id   = aws_api_gateway_rest_api.api.id
+  stage_name    = "v1"
+}
 
+resource "aws_api_gateway_base_path_mapping" "api" {
+  api_id      = aws_api_gateway_rest_api.api.id
+  stage_name  = aws_api_gateway_stage.api.stage_name
+  domain_name = aws_api_gateway_domain_name.api.domain_name
+}
 
 
 
