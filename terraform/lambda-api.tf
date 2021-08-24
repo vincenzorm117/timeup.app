@@ -22,10 +22,10 @@ resource "aws_lambda_function" "api" {
 
   environment {
     variables = {
-      OMDB_API_KEY = var.omdb_api_key
+      OMDB_API_KEY         = var.omdb_api_key
       OMDB_API_DOMAIN_NAME = var.omdb_api_domain_name
     }
-  }  
+  }
 }
 
 

@@ -40,7 +40,7 @@ resource "aws_api_gateway_deployment" "api" {
 
 resource "aws_api_gateway_domain_name" "api" {
   regional_certificate_arn = aws_acm_certificate_validation.timeup.certificate_arn
-  domain_name     = local.api_domain_name
+  domain_name              = local.api_domain_name
 
   endpoint_configuration {
     types = ["REGIONAL"]
