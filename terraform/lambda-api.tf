@@ -4,8 +4,8 @@
 
 data "archive_file" "api" {
   type        = "zip"
-  source_dir  = "../lambdas/starter"
-  output_path = "../lambdas/starter.zip"
+  source_dir  = "../lambdas/root"
+  output_path = "../lambdas/root.zip"
 }
 
 
