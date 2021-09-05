@@ -26,12 +26,16 @@ resource "aws_lambda_function" "api" {
       OMDB_API_DOMAIN_NAME = var.omdb_api_domain_name
     }
   }
+  
+  tags = local.tags
 }
 
 
 resource "aws_iam_role" "api" {
   name               = "TimeUpLambdaRole"
   assume_role_policy = data.aws_iam_policy_document.api-role.json
+  
+  tags = local.tags
 }
 
 data "aws_iam_policy_document" "api-role" {
@@ -57,6 +61,8 @@ resource "aws_iam_policy" "api" {
   description = ""
 
   policy = data.aws_iam_policy_document.api.json
+  
+  tags = local.tags
 }
 
 

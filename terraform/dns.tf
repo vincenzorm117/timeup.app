@@ -2,6 +2,8 @@
 
 resource "aws_route53_zone" "timeup" {
   name = var.domain
+  
+  tags = local.tags
 }
 
 resource "aws_route53_record" "api" {
